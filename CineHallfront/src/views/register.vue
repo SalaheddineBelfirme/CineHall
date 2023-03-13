@@ -1,12 +1,13 @@
 <template>
+  <NavBar/>
   <div class="wrapper">
     <div class="logo">
       <img
-        src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png"
+        src="../assets/img/logo (2).png"
         alt=""
       />
     </div>
-    <div class="text-center mt-4 name">Twitter</div>
+    <div class="text-center mt-4 name">CineHall</div>
     <form @submit.prevent="register" class="p-3 mt-3">
       <div class="form-field d-flex align-items-center">
         <span class="far fa-user"></span>
@@ -31,11 +32,17 @@
       <button class="btn mt-3">register</button>
     </form>
   </div>
+  <Footer/>
 </template>
 <script>
 import axios from 'axios';
+import NavBar from '../components/NavBar.vue';
+import Footer from '../components/footer.vue';
+
+
 export default{
     name:'register',
+    components: { NavBar,Footer, },
     methods:{
         register(){
           var fd=new FormData();
@@ -43,9 +50,13 @@ export default{
           fd.append('name',this.UserName)
           try{
             axios
-            .post(`http://localhost/traversymvc/Create/adduser`,fd,{headers:{'Content-Type':'multipart/form-data'}})
+            .post(`http://localhost/CineHall/BackEnd/public/Create/adduser`,fd,{headers:{'Content-Type':'multipart/form-data'}})
             .then((res)=>{
                 console.log(res.data);
+                navigator.clipboard.writeText(res.data.token)
+                alert( 'ur tokne is copied')
+                this.$router.push({ path: '/login' });
+              
             });}
             catch (err){
                 console.error(err);
@@ -70,6 +81,10 @@ export default{
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
 /* Reseting */
+body{
+    background: rgb(131,58,180);
+background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(164,8,8,0.936186974789916) 50%, rgba(252,176,69,1) 100%);
+        }
 * {
   margin: 0;
   padding: 0;
@@ -77,9 +92,7 @@ export default{
   font-family: "Poppins", sans-serif;
 }
 
-body {
-  background: #ecf0f3;
-}
+
 
 .wrapper {
   max-width: 350px;
@@ -140,7 +153,7 @@ body {
   box-shadow: none;
   width: 100%;
   height: 40px;
-  background-color: #03a9f4;
+  background-color: rgb(255, 193, 7);
   color: #fff;
   border-radius: 25px;
   box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;

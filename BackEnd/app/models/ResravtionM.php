@@ -6,12 +6,36 @@
        $this->db = new Database;
     }
 
+    public function getresrvtion ($id){
+      $qury="SELECT * FROM `reservation`,film WHERE reservation.id_film=film.id_filme and reservation.id_user=:id";
+      $stmt= $this->db->query($qury);
+      $stmt->bindValue("id", $id, PDO::PARAM_INT);
+      $stmt->execute();
+      return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
 
-    public function getFilme (){
+
+    public function getRes (){
       $qury="SELECT * FROM `reservation` WHERE 1";
       $stmt= $this->db->query($qury);
       $stmt->execute();
       return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function getResLastdate (){
+      $qury=" select film.id_filme FROM film WHERE film.date <= CURRENT_TIMESTAMP";
+      $stmt= $this->db->query($qury);
+      $stmt->execute();
+      return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+    
+    public function getplaces ($id,){
+      $qury="SELECT num_place FROM  `reservation` WHERE id_film=:id";
+      $stmt= $this->db->query($qury);
+      $stmt->bindValue("id", $id, PDO::PARAM_INT);
+      $stmt->execute();
+      return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
 

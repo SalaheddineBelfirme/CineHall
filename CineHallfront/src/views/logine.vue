@@ -1,12 +1,13 @@
 <template>
-  <div class="wrapper">
+<NavBar/>
+<div class="wrapper">
     <div class="logo">
       <img
-        src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png"
+        src="../assets/img/logo (2).png"
         alt=""
       />
     </div>
-    <div class="text-center mt-4 name">Twitter</div>
+    <div class="text-center mt-4 name">CineHall</div>
     <form @submit.prevent="login" class="p-3 mt-3">
       <div class="form-field d-flex align-items-center">
         <span class="far fa-user"></span>
@@ -24,23 +25,26 @@
       <a href="#">Forget password?</a> or <a href="#">Sign up</a>
     </div>
   </div>
-  <p>token:{{ token }}</p>
+<Footer/>
+
 </template>
 <script>
+import NavBar from '../components/NavBar.vue';
+import Footer from '../components/footer.vue';
 import axios from "axios";
 export default {
   name: "logine",
+  components: { NavBar,Footer, },
   methods: {
     login() {
       var fd = new FormData();
       fd.append("token", this.token);
-      
       try {
         axios
-          .post(`http://localhost/traversymvc/login/user`,fd,{headers:{'Content-Type':'multipart/form-data'}})
+          .post(`http://localhost/CineHall/BackEnd/public/login/user`,fd,{headers:{'Content-Type':'multipart/form-data'}})
           .then((res) => {
-            console.log(res.data);
-            localStorage.setItem('user',res.data)
+            localStorage.setItem('user',JSON.stringify(res.data))
+            this.$router.push({ path: '/' })
           });
       } catch (err) {
         console.error(err);
@@ -66,9 +70,10 @@ export default {
   font-family: "Poppins", sans-serif;
 }
 
-body {
-  background: #ecf0f3;
-}
+body{
+    background: rgb(131,58,180);
+background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(164,8,8,0.936186974789916) 50%, rgba(252,176,69,1) 100%);
+        }
 
 .wrapper {
   max-width: 350px;
@@ -129,7 +134,7 @@ body {
   box-shadow: none;
   width: 100%;
   height: 40px;
-  background-color: #03a9f4;
+  background-color: rgb(255, 193, 7);
   color: #fff;
   border-radius: 25px;
   box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;

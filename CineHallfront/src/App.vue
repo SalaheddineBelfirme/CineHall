@@ -1,24 +1,33 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
+
 
 <template>
   <header>
    
 
-    <nav class="nav">
-        <RouterLink class="nav-link" to="/"><img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="100" height="100" /></RouterLink>
-        <RouterLink class="nav-link" to="/about">About</RouterLink>
-        <RouterLink class="nav-link" to="/login">Login</RouterLink>
-        <RouterLink class="nav-link" to="/register">Register</RouterLink>
-      </nav>
+ 
   </header>
 
   <RouterView />
 </template>
 
-<style scoped>
+<script>
+import { RouterLink, RouterView } from 'vue-router'
 
+
+
+export default {
+components:{
+  
+}
+}
+
+</script>
+
+<style>
+
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Tilt+Neon&display=swap');
+
+*{font-family : 'Tilt Neon', cursive;}
 
 </style>

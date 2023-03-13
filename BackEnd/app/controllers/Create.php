@@ -1,8 +1,8 @@
 <?php
-// header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-// header('Access-Control-Allow-Methods: POST');
-// header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods,Authorization,X-Requested-With');
+ header('Access-Control-Allow-Methods: POST');
+ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods,Authorization,X-Requested-With');
     class Create extends Controller{
         private $postModel;
         private $salle;
@@ -60,8 +60,32 @@ header('Content-Type: application/json');
                 echo json_encode(['false' => 'error']);
             }
         }
+
+        public function addFilm(){
+            $date=$_POST['date'];
+            $name=$_POST['name'];
+            $salle=$_POST['salle'];
+            $prix=$_POST['prixF'];
+
+          
+            $modle=new Filme ();
+            $insert=$modle->AddFilme($date,$name,$salle,$prix);
+            if ($insert) {
+                echo json_encode(['true' => 'Filme added']);
+            } else {
+                echo json_encode(['false' => 'error']);
+            }
+        }
+       
+
+
+
+
+
        
     }
+
+    
 
 
 ?>
